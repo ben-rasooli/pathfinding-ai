@@ -1,9 +1,10 @@
 #pragma once
-
 #include "Game.h"
+#include "Grid.h"
+#include "Node.h"
+#include "Pathfinder.h"
 #include "Renderer2D.h"
-
-class Player;
+#include <string> 
 
 class Game2D : public aie::Game
 {
@@ -15,13 +16,9 @@ public:
 	virtual void Draw();
 
 protected:
-	aie::Renderer2D*	m_2dRenderer;
-
-	// Example textures.
-	aie::Texture*		m_texture;
-	aie::Texture*		m_texture2;
-	aie::Font*			m_font;
-
-	// Player.
-	Player* m_Player;
+	aie::Renderer2D* _2dRenderer;
+	aie::Font* _font;
+	Grid* _grid;
+	Path* _path;
+	Pathfinder* _pathfinder;
 };
