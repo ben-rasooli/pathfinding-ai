@@ -21,6 +21,7 @@ Path* Pathfinder::FindPath(string from, string to)
 
 	while (_openSet.Count() > 0)
 	{
+		// find the cheapest node to explore
 		Node<Vector2>* currentNode = _openSet.First();
 		for (int i = 1; i < _openSet.Count(); i++)
 			// if there is a better/cheaper node to choose
@@ -30,6 +31,7 @@ Path* Pathfinder::FindPath(string from, string to)
 		_openSet.Remove(currentNode);
 		_closedSet.PushBack(currentNode);
 
+		// build the path if the destination is reached
 		if (currentNode == destination)
 		{
 			Node<Vector2>* currentPathNode = destination;
@@ -43,6 +45,7 @@ Path* Pathfinder::FindPath(string from, string to)
 			break;
 		}
 
+		// expand the to-be-explored collection
 		for (int i = 0; i < currentNode->Neighbors.Count(); i++)
 		{
 			NodeNeighbor<Vector2>* neighbor = currentNode->Neighbors[i];
@@ -68,8 +71,8 @@ Path* Pathfinder::FindPath(string from, string to)
 
 int Pathfinder::calculateHCost(Node<Vector2>* from, Node<Vector2>* to)
 {
-	int distanceX = abs(from->Value.x - to->Value.x);
-	int distanceY = abs(from->Value.y - to->Value.y);
+	int distanceX = abs(from->Value.x - to->Value.x) / _straightMovementCost;
+	int distanceY = abs(from->Value.y - to->Value.y) / _straightMovementCost;
 
 	if (distanceX > distanceY)
 		return _diagnalMovementCost * distanceY + _straightMovementCost * (distanceX - distanceY);

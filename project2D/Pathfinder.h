@@ -14,12 +14,13 @@ public:
 	Pathfinder(List<Node<Vector2>*>* nodes);
 	~Pathfinder();
 
-	/**
-	Returns a path from a GridNode to another one containing all the connecting GridNodes in between
+	/*------------------------------------------------------
+	Returns a path from a GridNode to another one containing
+	all the connecting GridNodes in between.
 
 	@param from: origin GridNode
 	@param from: destination GridNode
-	*/
+	------------------------------------------------------*/
 	Path* FindPath(string from, string to);
 
 private:
