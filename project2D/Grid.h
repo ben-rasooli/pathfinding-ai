@@ -25,5 +25,9 @@ private:
 	Path* _path;
 
 	void populateNodes();
+
+	// This is used for ToString() method, so we can see the type
+	// of the node instead of just a number
+	string castNodeTypeToString(NodeType nodeType);
 };
 

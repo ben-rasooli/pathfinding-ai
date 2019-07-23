@@ -49,7 +49,7 @@ std::string Grid::ToString()
 	for (int i = 0; i < _nodes.Count(); i++)
 	{
 		auto node = _nodes[i];
-		result << "ID: " << node->Id << " Type: " << node->Type << " " << "[x: " << node->Value.x << " " << "y: " << node->Value.y << "]" << endl;
+		result << "ID: " << node->Id << " Type: " << castNodeTypeToString(node->Type) << " " << "[x: " << node->Value.x << " " << "y: " << node->Value.y << "]" << endl;
 		result << "Neighbors:" << endl;
 		for (int ii = 0; ii < node->Neighbors.Count(); ii++)
 			result << "\tID: " << node->Neighbors[ii]->Node->Id << " cost: " << node->Neighbors[ii]->Cost << endl;
@@ -58,6 +58,8 @@ std::string Grid::ToString()
 
 	return result.str();
 }
+
+
 
 // It creates all the nodes, then finds their neighbors, and finally
 // set the cost for each neighbor
@@ -211,5 +213,18 @@ void Grid::populateNodes()
 			int magnitude = (int)((neighborNode->Value - node->Value).magnitude());
 			node->Neighbors[ii]->Cost = magnitude;
 		}
+	}
+}
+
+string Grid::castNodeTypeToString(NodeType nodeType)
+{
+	switch (nodeType)
+	{
+	case Normal:
+		return "Normal";
+	case Wall:
+		return "Wall";
+	default:
+		return "?";
 	}
 }
